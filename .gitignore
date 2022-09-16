@@ -1,3 +1,4 @@
 test-values.yaml
 *.tar.gz
 index.yaml
+*.tgz
