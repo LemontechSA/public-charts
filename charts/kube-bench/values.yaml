@@ -6,8 +6,10 @@ cronjob:
 
 image:
   repository: aquasec/kube-bench
-  tag: 0.6.9
+  tag: v0.6.9
   pullPolicy: IfNotPresent
+
+extraEnv: []
 
 serviceAccount:
   # Specifies whether a service account should be created

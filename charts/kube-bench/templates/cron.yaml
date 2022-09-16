@@ -19,8 +19,10 @@ spec:
               image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
               imagePullPolicy: {{ .Values.image.pullPolicy }}
               command: {{ template "cronjob.command" . }}
+              {{- with .Values.resources }}
               resources:
-              {{ toYaml .Values.resources | indent 14 }}
+              {{ toYaml .Values.resources | nindent 14 }}
+              {{- end }}
               volumeMounts:
                 - name: var-lib-kubelet
                   mountPath: /var/lib/kubelet
@@ -31,6 +33,9 @@ spec:
                 - name: etc-kubernetes
                   mountPath: /etc/kubernetes
                   readOnly: true
+              {{- with .Values.extraEnv }}
+              env: {{ toYaml . | nindent 14 }}
+              {{- end}}
           volumes:
             - name: var-lib-kubelet
               hostPath:
