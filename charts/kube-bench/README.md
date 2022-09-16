@@ -11,7 +11,7 @@ Helm chart to deploy run kube-bench as a cronjob on gke or eks.
 Add Lemontech public chart repo:
 
 ```console
-helm repo add lemontech TBD
+helm repo add lemontech https://charts.lemontech.engineering
 ```
 
 A simple install with default values:
