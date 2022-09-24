@@ -11,7 +11,7 @@ Helm chart to deploy run kube-bench as a cronjob on gke or eks.
 Add Lemontech public chart repo:
 
 ```console
-helm repo add lemontech https://charts.lemontech.engineering
+helm repo add lemontech https://charts.lemontech.engineering/
 ```
 
 A simple install with default values:
@@ -50,9 +50,10 @@ helm install my-release lemontech/kube-bench -f values.yaml
 | concurrencyPolicy | string | `"Forbid"` |  |
 | cronjob.command | list | `[]` |  |
 | cronjob.schedule | string | `"0 0 1 * *"` |  |
+| extraEnv | list | `[]` |  |
 | image.pullPolicy | string | `"IfNotPresent"` |  |
 | image.repository | string | `"aquasec/kube-bench"` |  |
-| image.tag | string | `"0.4.0"` |  |
+| image.tag | string | `"v0.6.9"` |  |
 | nodeSelector | object | `{}` |  |
 | provider | string | `"eks"` |  |
 | resources | object | `{}` |  |
