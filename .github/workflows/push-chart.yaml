@@ -38,5 +38,5 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           for package in packages/*;
-            do helm s3 push --ignore-if-exists $package lemontech;
+            do helm s3 push --ignore-if-exists --relative $package lemontech;
           done;
