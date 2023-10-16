@@ -63,7 +63,8 @@ server:
       #   targetLabel: __name__
     prometheus:
       timerType: histogram
-  podAnnotations: {}
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
   podLabels: {}
   secretLabels: {}
   secretAnnotations: {}
@@ -229,7 +230,8 @@ server:
       # enabled: false
       prometheus: {}
       # timerType: histogram
-    podAnnotations: {}
+    podAnnotations:
+      sidecar.istio.io/inject: "false"
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -252,7 +254,8 @@ server:
       # enabled: false
       prometheus: {}
       # timerType: histogram
-    podAnnotations: {}
+    podAnnotations:
+      sidecar.istio.io/inject: "false"
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -275,7 +278,8 @@ server:
       # enabled: false
       prometheus: {}
       # timerType: histogram
-    podAnnotations: {}
+    podAnnotations:
+      sidecar.istio.io/inject: "false"
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -299,7 +303,8 @@ admintools:
     port: 22
     annotations: {}
   podLabels: {}
-  podAnnotations: {}
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -350,7 +355,8 @@ web:
     #    hosts:
     #      - chart-example.local
 
-  podAnnotations: {}
+  podAnnotations:
+    sidecar.istio.io/inject: "false"
   podLabels: {}
 
   resources: {}
