@@ -21,7 +21,7 @@ server:
   sidecarContainers: {}
   image:
     repository: temporalio/server
-    tag: 1.21.1
+    tag: 1.22.0
     pullPolicy: IfNotPresent
 
   # Global default settings (can be overridden per service)
@@ -93,6 +93,35 @@ server:
 
     # IMPORTANT: This value cannot be changed, once it's set.
     numHistoryShards: 512
+
+    # Define your TLS configuration here. See https://docs.temporal.io/references/configuration#tls
+    # for configuration options. You must also use `server.additionalVolumeMounts` and `server.additionalVolumes`
+    # to mount certificates (from Secret or ConfigMap etc) to the path you use below.
+    # tls:
+    #   internode:
+    #     server:
+    #       certFile: /path/to/internode/cert/file
+    #       keyFile: /path/to/internode/key/file
+    #       requireClientAuth: true
+    #       clientCaFiles:
+    #         - /path/to/internode/serverCa
+    #     client:
+    #       serverName: dnsSanInInternodeCertificate
+    #       rootCaFiles:
+    #         - /path/to/internode/serverCa
+    #   frontend:
+    #     server:
+    #       certFile: /path/to/frontend/cert/file
+    #       keyFile: /path/to/frontend/key/file
+    #       requireClientAuth: true
+    #       clientCaFiles:
+    #         - /path/to/internode/serverCa
+    #         - /path/to/sdkClientPool1/ca
+    #         - /path/to/sdkClientPool2/ca
+    #     client:
+    #       serverName: dnsSanInFrontendCertificate
+    #       rootCaFiles:
+    #         - /path/to/frontend/serverCa
 
     persistence:
       defaultStore: default
@@ -176,7 +205,8 @@ server:
       # enabled: false
       prometheus: {}
       # timerType: histogram
-    podAnnotations: {}
+    podAnnotations:
+      sidecar.istio.io/inject: "true"
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -186,6 +216,7 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
+    replicaCount: 2
 
   history:
     service:
@@ -208,6 +239,7 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
+    replicaCount: 2
 
   matching:
     service:
@@ -230,6 +262,7 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
+    replicaCount: 2
 
   worker:
     service:
@@ -252,12 +285,13 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
+    replicaCount: 2
 
 admintools:
   enabled: true
   image:
     repository: temporalio/admin-tools
-    tag: 1.21.1
+    tag: 1.22.0
     pullPolicy: IfNotPresent
 
   service:
@@ -289,7 +323,7 @@ web:
 
   image:
     repository: temporalio/ui
-    tag: 2.16.2
+    tag: 2.19.0
     pullPolicy: IfNotPresent
 
   service:
@@ -336,6 +370,9 @@ web:
   tolerations: []
 
   affinity: {}
+
+  additionalVolumes: []
+  additionalVolumeMounts: []
 
   additionalEnv: []
 
