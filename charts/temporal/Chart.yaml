@@ -20,7 +20,7 @@ sources:
 
 dependencies:
   - name: cassandra
-    version: "0.14.3"
+    version: '0.14.3'
     repository: https://charts.helm.sh/incubator
     enabled: false
     condition: cassandra.enabled
@@ -49,7 +49,7 @@ type: application
 
 # This is the chart version. This version number should be incremented each time you make changes
 # to the chart and its templates, including the app version.
-version: 0.28.1
+version: 0.28.2
 
 # This is the version number of the application being deployed. This version number should be
 # incremented each time you make changes to the application.
