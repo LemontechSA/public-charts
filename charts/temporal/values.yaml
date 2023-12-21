@@ -217,7 +217,13 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
-    replicaCount: 2
+    replicaCount: 3
+    autoscaling:
+      enabled: true
+      minReplicas: 3
+      maxReplicas: 6
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 80
 
   history:
     service:
@@ -241,7 +247,13 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
-    replicaCount: 2
+    replicaCount: 3
+    autoscaling:
+      enabled: true
+      minReplicas: 3
+      maxReplicas: 6
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 80
 
   matching:
     service:
@@ -265,7 +277,13 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
-    replicaCount: 2
+    replicaCount: 3
+    autoscaling:
+      enabled: true
+      minReplicas: 3
+      maxReplicas: 6
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 80
 
   worker:
     service:
@@ -289,7 +307,13 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
-    replicaCount: 2
+    replicaCount: 1
+    autoscaling:
+      enabled: true
+      minReplicas: 1
+      maxReplicas: 3
+      targetCPUUtilizationPercentage: 80
+      targetMemoryUtilizationPercentage: 80
 
 admintools:
   enabled: true
