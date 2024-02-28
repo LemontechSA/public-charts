@@ -247,11 +247,11 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
-    replicaCount: 3
+    replicaCount: 6
     autoscaling:
       enabled: true
-      minReplicas: 3
-      maxReplicas: 6
+      minReplicas: 6
+      maxReplicas: 10
       targetCPUUtilizationPercentage: 80
       targetMemoryUtilizationPercentage: 80
 
@@ -277,11 +277,11 @@ server:
     containerSecurityContext: {}
     topologySpreadConstraints: {}
     podDisruptionBudget: {}
-    replicaCount: 3
+    replicaCount: 6
     autoscaling:
       enabled: true
-      minReplicas: 3
-      maxReplicas: 6
+      minReplicas: 6
+      maxReplicas: 10
       targetCPUUtilizationPercentage: 80
       targetMemoryUtilizationPercentage: 80
 
