@@ -14,7 +14,9 @@ metadata:
     app.kubernetes.io/component: {{ $service }}
     app.kubernetes.io/part-of: {{ $.Chart.Name }}
 spec:
+  {{- if not $serviceValues.autoscaling.enabled }}
   replicas: {{ default $.Values.server.replicaCount $serviceValues.replicaCount }}
+  {{- end }}
   selector:
     matchLabels:
       app.kubernetes.io/name: {{ include "temporal.name" $ }}
@@ -65,10 +67,6 @@ spec:
           image: "{{ $.Values.cassandra.image.repo }}:{{ $.Values.cassandra.image.tag }}"
           imagePullPolicy: {{ $.Values.cassandra.image.pullPolicy }}
           command: ['sh', '-c', 'until cqlsh {{ include "cassandra.host" $ }} {{ $.Values.cassandra.config.ports.cql }} -e "SELECT keyspace_name FROM system_schema.keyspaces" | grep {{ $.Values.server.config.persistence.default.cassandra.keyspace }}$; do echo waiting for default keyspace to become ready; sleep 1; done;']
-        - name: check-cassandra-visibility-schema
-          image: "{{ $.Values.cassandra.image.repo }}:{{ $.Values.cassandra.image.tag }}"
-          imagePullPolicy: {{ $.Values.cassandra.image.pullPolicy }}
-          command: ['sh', '-c', 'until cqlsh {{ include "cassandra.host" $ }} {{ $.Values.cassandra.config.ports.cql }} -e "SELECT keyspace_name FROM system_schema.keyspaces" | grep {{ $.Values.server.config.persistence.visibility.cassandra.keyspace }}$; do echo waiting for visibility keyspace to become ready; sleep 1; done;']
         {{- end }}
         {{- if or $.Values.elasticsearch.enabled $.Values.elasticsearch.external }}
         - name: check-elasticsearch-index
