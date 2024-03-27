@@ -1,5 +1,5 @@
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: ''
+fullnameOverride: ''
 
 # Chart debug mode
 # (eg. disable helm hook delete policy)
@@ -64,7 +64,7 @@ server:
     prometheus:
       timerType: histogram
   podAnnotations:
-    sidecar.istio.io/inject: "false"
+    sidecar.istio.io/inject: 'false'
   podLabels: {}
   secretLabels: {}
   secretAnnotations: {}
@@ -90,7 +90,7 @@ server:
     runAsUser: 1000
 
   config:
-    logLevel: "debug,info"
+    logLevel: 'debug,info'
 
     # IMPORTANT: This value cannot be changed, once it's set.
     numHistoryShards: 512
@@ -129,68 +129,68 @@ server:
       additionalStores: {}
 
       default:
-        driver: "cassandra"
+        driver: 'cassandra'
 
         cassandra:
           hosts: []
           # port: 9042
-          keyspace: "temporal"
-          user: "user"
-          password: "password"
-          existingSecret: ""
+          keyspace: 'temporal'
+          user: 'user'
+          password: 'password'
+          existingSecret: ''
           replicationFactor: 1
           consistency:
             default:
-              consistency: "local_quorum"
-              serialConsistency: "local_serial"
+              consistency: 'local_quorum'
+              serialConsistency: 'local_serial'
           # datacenter: "us-east-1a"
           # maxQPS: 1000
           # maxConns: 2
 
         sql:
-          driver: "mysql"
-          host: "mysql"
+          driver: 'mysql'
+          host: 'mysql'
           port: 3306
-          database: "temporal"
-          user: "temporal"
-          password: "temporal"
-          existingSecret: ""
-          secretName: ""
+          database: 'temporal'
+          user: 'temporal'
+          password: 'temporal'
+          existingSecret: ''
+          secretName: ''
           maxConns: 20
-          maxConnLifetime: "1h"
+          maxConnLifetime: '1h'
           # connectAttributes:
           # tx_isolation: 'READ-COMMITTED'
 
       visibility:
-        driver: "cassandra"
+        driver: 'cassandra'
 
         cassandra:
           hosts: []
           # port: 9042
-          keyspace: "temporal_visibility"
-          user: "user"
-          password: "password"
-          existingSecret: ""
+          keyspace: 'temporal_visibility'
+          user: 'user'
+          password: 'password'
+          existingSecret: ''
           # datacenter: "us-east-1a"
           # maxQPS: 1000
           # maxConns: 2
           replicationFactor: 1
           consistency:
             default:
-              consistency: "local_quorum"
-              serialConsistency: "local_serial"
+              consistency: 'local_quorum'
+              serialConsistency: 'local_serial'
 
         sql:
-          driver: "mysql"
-          host: "mysql"
+          driver: 'mysql'
+          host: 'mysql'
           port: 3306
-          database: "temporal_visibility"
-          user: "temporal"
-          password: "temporal"
-          existingSecret: ""
-          secretName: ""
+          database: 'temporal_visibility'
+          user: 'temporal'
+          password: 'temporal'
+          existingSecret: ''
+          secretName: ''
           maxConns: 20
-          maxConnLifetime: "1h"
+          maxConnLifetime: '1h'
           # connectAttributes:
           #   tx_isolation: 'READ-COMMITTED'
 
@@ -207,7 +207,7 @@ server:
       prometheus: {}
       # timerType: histogram
     podAnnotations:
-      sidecar.istio.io/inject: "true"
+      sidecar.istio.io/inject: 'true'
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -237,7 +237,7 @@ server:
       prometheus: {}
       # timerType: histogram
     podAnnotations:
-      sidecar.istio.io/inject: "false"
+      sidecar.istio.io/inject: 'false'
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -267,7 +267,7 @@ server:
       prometheus: {}
       # timerType: histogram
     podAnnotations:
-      sidecar.istio.io/inject: "false"
+      sidecar.istio.io/inject: 'false'
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -297,7 +297,7 @@ server:
       prometheus: {}
       # timerType: histogram
     podAnnotations:
-      sidecar.istio.io/inject: "false"
+      sidecar.istio.io/inject: 'false'
     podLabels: {}
     resources: {}
     nodeSelector: {}
@@ -319,7 +319,7 @@ admintools:
   enabled: true
   image:
     repository: temporalio/admin-tools
-    tag: 1.22.4
+    tag: 1.25.0
     pullPolicy: IfNotPresent
 
   service:
@@ -328,7 +328,7 @@ admintools:
     annotations: {}
   podLabels: {}
   podAnnotations:
-    sidecar.istio.io/inject: "false"
+    sidecar.istio.io/inject: 'false'
   nodeSelector: {}
   tolerations: []
   affinity: {}
@@ -371,7 +371,7 @@ web:
     # ingress.kubernetes.io/ssl-redirect: "false"
     # traefik.frontend.rule.type: PathPrefix
     hosts:
-      - "/"
+      - '/'
       # - "domain.com/xyz"
       # - "domain.com"
     tls: []
@@ -380,7 +380,7 @@ web:
     #      - chart-example.local
 
   podAnnotations:
-    sidecar.istio.io/inject: "false"
+    sidecar.istio.io/inject: 'false'
   podLabels: {}
 
   resources: {}
@@ -407,7 +407,7 @@ web:
   additionalEnv: []
 
   containerSecurityContext: {}
-  
+
   securityContext: {}
 
 schema:
@@ -430,11 +430,11 @@ elasticsearch:
   host: elasticsearch-master-headless
   scheme: http
   port: 9200
-  version: "v7"
-  logLevel: "error"
-  username: ""
-  password: ""
-  visibilityIndex: "temporal_visibility_v1_dev"
+  version: 'v7'
+  logLevel: 'error'
+  username: ''
+  password: ''
+  visibilityIndex: 'temporal_visibility_v1_dev'
 
 prometheus:
   enabled: true
@@ -454,9 +454,9 @@ grafana:
     dashboardproviders.yaml:
       apiVersion: 1
       providers:
-        - name: "default"
+        - name: 'default'
           orgId: 1
-          folder: ""
+          folder: ''
           type: file
           disableDeletion: false
           editable: true
