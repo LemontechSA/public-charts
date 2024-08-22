@@ -5,6 +5,14 @@ on:
       - master
     paths:
       - 'charts/**'
+
+permissions:
+  id-token: write
+  contents: read
+
+env:
+  AWS_REGION : us-east-1
+
 jobs:
   push:
     name: Push to S3 repository
@@ -13,29 +21,37 @@ jobs:
       image: ubuntu
     steps:
       - name: Checkout Code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v4
+
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v1.7.0
+        with:
+          role-to-assume: ${{ secrets.PUBLIC_CHARTS_PUBLISHER_ROLE_ARN }}
+          role-session-name: GitHub
+          aws-region: ${{ env.AWS_REGION }}
+
       - name: Install dependencies
         run: apt-get update && apt install -y git curl
+
       - name: Install Helm
         run: curl -sL https://raw.githubusercontent.com/helm/helm/main/scripts/get-helm-3 | bash -s
+
       - name: Install Helm S3 plugin
         run: helm plugin install https://github.com/hypnoglow/helm-s3.git --version 0.14.0
+
       - name: Adding repository
         env:
           AWS_S3_REPOSITORY: ${{ secrets.AWS_S3_REPOSITORY }}
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: helm repo add lemontech $AWS_S3_REPOSITORY
+
       - name: Package charts
         run: |
           for chart in charts/*;
             do helm dependencies update $chart && \
             helm package $chart -d ./packages/;
           done
+
       - name: Push charts to repository
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
           for package in packages/*;
             do helm s3 push --ignore-if-exists --relative $package lemontech;
